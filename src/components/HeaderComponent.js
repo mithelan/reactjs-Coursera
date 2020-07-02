@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Navbar, NavbarBrand, Jumbotron, NavbarToggler, Collapse, Nav, NavItem, NavLink} from "reactstrap";
+import {Link} from "react-router-dom";
 
 
 
@@ -31,24 +32,24 @@ class Header extends Component {
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/home">
+                                    <Link className="nav-link" to="/home">
                                         <span className="fa fa-home fa-lg"></span> Home
-                                    </NavLink>
+                                    </Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/aboutus">
+                                    <Link className="nav-link" to="/aboutus">
                                         <span className="fa fa-info fa-lg"></span> About Us
-                                    </NavLink>
+                                    </Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/menu">
+                                    <Link className="nav-link" to="/menu">
                                         <span className="fa fa-list fa-lg"></span> Menu
-                                    </NavLink>
+                                    </Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className="nav-link" to="/contactus">
+                                    <Link className="nav-link" to="/contactus">
                                         <span className="fa fa-info fa-lg"></span> Contact Us
-                                    </NavLink>
+                                    </Link>
                                 </NavItem>
                             </Nav>
                         </Collapse>
