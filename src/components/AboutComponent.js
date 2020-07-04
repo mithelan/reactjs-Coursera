@@ -1,14 +1,12 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import {baseUrl} from "../shared/baseURL";
+import {Loading} from "./LoadingComponent";
+import {AnimateOnChange} from 'react-animation'
+import FlipMove from "react-flip-move";
 
-function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
-        return (
-            <RenderLeader leader={leader} />
-        );
-    });
 
 
     function RenderLeader({leader}) {
@@ -17,7 +15,7 @@ function About(props) {
             <div key={leader.id} className="col-12 mt-5">
                 <Media tag="li">
                     <Media left middle>
-                        <Media object src={leader.image} alt={leader.name} />
+                        <Media object src={baseUrl+leader.image} alt={leader.name} />
                     </Media>
                     <Media body className="col-12">
                         <Media heading>{leader.name}</Media>
@@ -29,6 +27,42 @@ function About(props) {
         );
     }
 
+function About(props) {
+
+    const leaders = props.leaders.leaders.map((leader) => {
+        return (
+
+
+            <AnimateOnChange in>
+                {props.leaders.map(leader => (
+
+                        <RenderLeader key={leader.id} leader={leader} />
+
+                ))}
+            </AnimateOnChange>
+        );
+    });
+    if (props.leaders.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.leaders.errMess) {
+        return(
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        <h4>{props.leaders.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    else
 
     return(
         <div className="container">
