@@ -17,6 +17,21 @@ export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
 
     return fetch(baseUrl + 'dishes')
+        .then(response=>{
+            if(response.ok){
+                return response;
+            }
+            else{
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+            },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+
         .then(response => response.json())
         .then(dishes => dispatch(addDishes(dishes)));
 }
@@ -37,6 +52,21 @@ export const addDishes = (dishes) => ({
 
 export const fetchComments = () => (dispatch) => {
     return fetch(baseUrl + 'comments')
+        .then(response => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    error.response = response;
+                    throw error;
+                }
+            },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+
+
         .then(response => response.json())
         .then(comments => dispatch(addComments(comments)));
 };
@@ -56,6 +86,19 @@ export const fetchPromos = () => (dispatch) => {
     dispatch(promosLoading());
 
     return fetch(baseUrl + 'promotions')
+        .then(response => {
+                if (response.ok) {
+                    return response;
+                } else {
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    error.response = response;
+                    throw error;
+                }
+            },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
         .then(response => response.json())
         .then(promos => dispatch(addPromos(promos)));
 }
